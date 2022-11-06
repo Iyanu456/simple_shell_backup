@@ -53,3 +53,12 @@ char *_strdup(const char *str)
 	new_str[len]  = '\0';
 	return (new_str);
 }
+
+int _strlen(const char *str)
+{
+	int len = 0;
+
+	while (str[len] != '\0')
+		len++;
+	return (len);
+}
