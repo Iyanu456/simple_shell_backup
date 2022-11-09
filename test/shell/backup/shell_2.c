@@ -21,8 +21,25 @@ int main(int ac, char **av)
 			}
 
 		linesize = getline(&line, &len, stdin);
-		buff = line;
-		_tokenizer(buff);
+
+		token = strtok(line, delimiter);
+
+		tok_length = _strlen(token);
+
+		toks = malloc(sizeof(char*) * tok_length);
+
+		while (token != NULL)
+			{
+				toks[counter] =  _strdup(token);
+				token = strtok(NULL, delimiter);
+				counter++;
+			}
+		int i;
+		toks[counter] = token;
+		for (i = 0; i < counter; i++)
+		{
+		       printf("arr[%d]: %s\n", i, **toks[i]);
+		}
 	}
 	return (0);
 }
