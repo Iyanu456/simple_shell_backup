@@ -62,3 +62,21 @@ int _strlen(const char *str)
 		len++;
 	return (len);
 }
+
+char *del_whitespace(char *line)
+{
+	int i = 0, len;
+
+	len = _strlen(line);
+
+	while (line[i] != '\0')
+	{
+		if (line[i] == line[len] && line[len] == ' ')
+		{
+			line[len] = '\0';;
+			break;
+		}
+	}
+
+	return(line);
+}

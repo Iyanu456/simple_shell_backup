@@ -17,5 +17,5 @@ int _strcmp(const char *str1, const  char *str2);
 char *_strdup(const char *str);
 
 char **_tokenizer(char *line);
-
+char *del_whitespace(char *line);
 #endif

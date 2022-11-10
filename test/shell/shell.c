@@ -3,13 +3,13 @@ int main(int ac, char **av)
 {
 	char **toks;
 
-	char *line = NULL, *token, *delimiter = " ", *buff;
+	char *line = NULL, **buff, *temp = NULL;
 
 	size_t len = 0;
 
 	ssize_t linesize = 0;
 
-	int int_mode = isatty(STDIN), counter = 0, tok_length;
+	int conv_str, int_mode = isatty(STDIN);
 
 	while (1)
 	{
@@ -21,8 +21,14 @@ int main(int ac, char **av)
 			}
 
 		linesize = getline(&line, &len, stdin);
-		buff = line;
-		_tokenizer(buff);
+		printf("%s, size = %zd\n", line, linesize);
+		buff = _tokenizer(line);
+		conv_str = atoi(buff[0]);
+		printf("%d\n", conv_str);
+		if (buff[0] == "exit")
+			printf("true, %s, %d\n", buff[0], conv_str);
+
 	}
+	exit(98);
 	return (0);
 }
