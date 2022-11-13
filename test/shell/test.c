@@ -1,9 +1,8 @@
 #include "main.h"
 int main(void)
 {
-	char **env = environ, *path = NULL;
-	path = *env;
-
-	printf("%s\n", path);
+	char **str, line[] = "Iyanu is a boy";
+	str = _tokenizer(line);
+	printf("%s\n", line);
 	return(0);
 }

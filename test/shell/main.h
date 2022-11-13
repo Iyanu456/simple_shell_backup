@@ -15,7 +15,9 @@
 int _strlen(const char *str);
 int _strcmp(const char *str1, const  char *str2);
 char *_strdup(const char *str);
+unsigned int check_spaces(char *s);
 
-char **_tokenizer(char *line);
+char **_tokenizer(char line[]);
+char **create_tokens(char *line);
 char *del_whitespace(char *line);
 #endif
