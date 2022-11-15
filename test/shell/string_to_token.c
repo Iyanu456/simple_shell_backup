@@ -3,11 +3,8 @@ char **create_tokens(char *line)
 {
 	char *token, **tokens = NULL, *copy;
 
-	int len = 0, i = 0, spaces = 0, count = 0, count2 = 0;
+	int i = 0, spaces = 0;
 
-	char str;
-
-	char **name = NULL;
 	spaces += check_spaces(line);
 
 	tokens = malloc(sizeof(char *) * (spaces + 1));

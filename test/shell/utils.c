@@ -39,18 +39,17 @@ int _strcmp(const char *str1, const char *str2)
 
 char *_strdup(const char *str)
 {
-	int i, len = 0;
+	int i = 0, len = 0;
 
 	char *new_str;
 
-	while (str[len] != '\0')
-		len++;
-	for (i = 0; i < len; i++)
+	len = _strlen(str);
+	new_str = malloc(sizeof(char)  * (len + 1));
+	while (str[i] != '\0')
 	{
 		new_str[i] = str[i];
+		i++;
 	}
-
-	new_str[len]  = '\0';
 	return (new_str);
 }
 

@@ -1,15 +1,13 @@
 #include "main.h"
-int main(int ac, char **av)
+int main()
 {
-	char **toks;
-
-	char *line = NULL, **buff, *temp = NULL, *tmp_str;
+	char *line = NULL, **buff, *tmp_str;
 
 	size_t len = 0;
 
 	ssize_t linesize = 0;
 
-	int conv_str, count = 0, int_mode = isatty(STDIN);
+	int count = 0, int_mode = isatty(STDIN);
 
 	while (1)
 	{
@@ -17,10 +15,10 @@ int main(int ac, char **av)
 
 		if  (int_mode == 1)
 			{
-				write(STDOUT, "~$ ", 3);
+				write(STDOUT, "($) ", 4);
 			}
 
-		linesize = getline(&line, &len, stdin);
+		linesize += getline(&line, &len, stdin);
 
 		buff = create_tokens(line);
 
@@ -37,8 +35,7 @@ int main(int ac, char **av)
 
 			count = 0;
 
-			if (_strcmp(tmp_str, "exit") == 0)
-				printf("They are the same\n");
+			handle_token(tmp_str);
 
 			buff++;
 		}
