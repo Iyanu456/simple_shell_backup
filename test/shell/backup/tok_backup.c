@@ -1,9 +1,9 @@
 #include "main.h"
-char **_tokenizer(char *line)
+char *_tokenizer(char *line)
 {
 	int i, count = 0;
 
-	char **buffer, *token, *buf = NULL;
+	char *buffer, *token, *buf = NULL;
 
 	buf = line;
 

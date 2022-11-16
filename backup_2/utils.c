@@ -1,4 +1,4 @@
-#include"main.h"
+#include"shell.h"
 
 /**
  * _strcmp - compares two strings
@@ -8,14 +8,14 @@
  * Return: 0 on sucess, 1 or -1 on failure
  */
 
-int _strcmp(const char *str1, const char *str2)
+int _strcmp(char *s1, char *s2)
 {
 	int i, len_1 = 0, len_2 = 0;
 
-	while (str1[len_1] != '\0')
+	while (s1[len_1] != '\0')
 		len_1++;
 
-	while (str2[len_2] != '\0')
+	while (s2[len_2] != '\0')
 		len_2++;
 
 	if (len_1  < len_2)
@@ -28,7 +28,7 @@ int _strcmp(const char *str1, const char *str2)
 	{
 		for (i = 0; i < len_1; i++)
 		{
-			if (str1[i] == str2[i])
+			if (s1[i] == s2[i])
 				continue;
 			else
 				return (-1);
@@ -39,17 +39,18 @@ int _strcmp(const char *str1, const char *str2)
 
 char *_strdup(const char *str)
 {
-	int i = 0, len = 0;
+	int i, len = 0;
 
 	char *new_str;
 
-	len = _strlen(str);
-	new_str = malloc(sizeof(char)  * (len + 1));
-	while (str[i] != '\0')
+	while (str[len] != '\0')
+		len++;
+	for (i = 0; i < len; i++)
 	{
 		new_str[i] = str[i];
-		i++;
 	}
+
+	new_str[len]  = '\0';
 	return (new_str);
 }
 
@@ -78,16 +79,4 @@ char *del_whitespace(char *line)
 	}
 
 	return(line);
-}
-
-unsigned int check_spaces(char *s)
-{
-	unsigned int i, count = 0;
-
-	for (i = 0; s[i] != '\0'; i++)
-	{
-		if (s[i] == ' ')
-			count++;
-	}
-	return (count);
 }
