@@ -23,7 +23,7 @@ int main(int ac, char **av, char *envp[])
 		int_mode = isatty(STDIN);
 
 		if  (int_mode == 1)
-			write(STDOUT, "($) ", 4);
+			write(STDOUT, "$ ", 2);
 
 		linesize += getline(&line, &len, stdin);
 
