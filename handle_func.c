@@ -2,10 +2,10 @@
 #include <stdlib.h>
 
 /**
- * get_printf_func - get printf function
- * @s: strng
- * Description: searches for appropriate printf function
- * Return: formatted string
+ * handle_token -checks if tokens can be executed
+ * @token: strng
+ * Description: checks if tokens can be executed
+ * Return: integer
  */
 
 int handle_token(char *token)

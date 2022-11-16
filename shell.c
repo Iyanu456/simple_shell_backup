@@ -1,5 +1,10 @@
 #include "shell.h"
-int main()
+/**
+ * main - main shell loop
+ * Description: main shell loop
+ * Return: 0;
+ */
+int main(void)
 {
 	char *line = NULL, **buff, *tmp_str;
 
@@ -14,9 +19,7 @@ int main()
 		int_mode = isatty(STDIN);
 
 		if  (int_mode == 1)
-			{
-				write(STDOUT, "($) ", 4);
-			}
+			write(STDOUT, "($) ", 4);
 
 		linesize += getline(&line, &len, stdin);
 
