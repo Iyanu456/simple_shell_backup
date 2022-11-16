@@ -1,15 +1,13 @@
-#include "main.h"
-int main(int ac, char **av)
+#include "shell.h"
+int main()
 {
-	char **toks;
-
-	char *line = NULL, **buff, *temp = NULL;
+	char *line = NULL, **buff, *tmp_str;
 
 	size_t len = 0;
 
 	ssize_t linesize = 0;
 
-	int conv_str, int_mode = isatty(STDIN);
+	int count = 0, int_mode = isatty(STDIN);
 
 	while (1)
 	{
@@ -17,18 +15,30 @@ int main(int ac, char **av)
 
 		if  (int_mode == 1)
 			{
-				write(STDOUT, "~$ ", 3);
+				write(STDOUT, "($) ", 4);
 			}
 
-		linesize = getline(&line, &len, stdin);
-		printf("%s, size = %zd\n", line, linesize);
-		buff = _tokenizer(line);
-		conv_str = atoi(buff[0]);
-		printf("%d\n", conv_str);
-		if (buff[0] == "exit")
-			printf("true, %s, %d\n", buff[0], conv_str);
+		linesize += getline(&line, &len, stdin);
 
+		buff = create_tokens(line);
+
+		while (*buff != NULL)
+		{
+			tmp_str = *buff;
+
+			while (tmp_str[count] != '\0')
+			{
+				if (tmp_str[count] == '\n')
+					tmp_str[count] = '\0';
+				count++;
+			}
+
+			count = 0;
+
+			handle_token(tmp_str);
+
+			buff++;
+		}
 	}
-	exit(98);
 	return (0);
 }

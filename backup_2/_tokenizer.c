@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 char **_tokenizer(char *line)
 {
 	int i, count = 0;
@@ -10,8 +10,10 @@ char **_tokenizer(char *line)
 	buffer = malloc(sizeof(char*) * MAX_BUFFER);
 
 	token = strtok(buf, " ");
+	if (buf != NULL)
+		printf("%s\n", buf);
 
-	for (i = 0; buf[i + 1] != '\0'; i++)
+	for (i = 0; buf[i] != '\0'; i++)
 	{
 		buffer[i] = token;
 
@@ -19,7 +21,6 @@ char **_tokenizer(char *line)
 
 		count++;
 	}
-
-	buffer[count] = '\0';
+	printf("%d\n", count);
 	return (buffer);
 }
