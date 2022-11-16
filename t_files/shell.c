@@ -4,7 +4,7 @@
  * Description: main shell loop
  * Return: 0;
  */
-int main(int ac, char **av, char *envp[])
+int main(void)
 {
 	char *line = NULL, **buff, *tmp_str;
 
@@ -14,10 +14,6 @@ int main(int ac, char **av, char *envp[])
 
 	int count = 0, int_mode = isatty(STDIN);
 
-	(void)envp, (void)av;
-
-	if (ac < 1)
-		return (-1);
 	while (1)
 	{
 		int_mode = isatty(STDIN);
