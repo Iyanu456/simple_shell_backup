@@ -23,6 +23,7 @@ int main(int ac, char **av, char *envp[])
 		return (-1);
 	while (1)
 	{
+		free_buffers(buff);
 		prompt();
 		linesize += getline(&line, &len, stdin);
 
