@@ -3,32 +3,42 @@
 
 /**
  * handle_token -checks if tokens can be executed
- * @token: strng
+ * @command: command to be executed
+ * @token: string
  * Description: checks if tokens can be executed
  * Return: integer
  */
 
-int handle_token(char *token)
+int handle_token(char **command, char *token)
 {
-	char *str = token;
+	char **str = environ;
 
-	int i;
+	int i, x = 0;
+
+	(void)command;
 
 	for (i = 0; i < 2; i++)
 	{
 		if (_strcmp(token, "env") == 0)
 		{
-			str = getenv("PATH");
-			write(STDOUT, str, _strlen(str));
-			write(STDOUT, "\n", 1);
-			return (0);
+			while (str[x])
+			{
+				write(STDOUT, (const void *)str[x], _strlen(str[x]));
+				write(STDOUT, "\n", 1);
+
+				x++;
+			}
+			return (1);
 		}
 
 		else if (_strcmp(token, "exit") == 0)
+		{
 			exit(98);
+			return (1);
+		}
 		else
 			continue;
 	}
 
-	return (-1);
+	return (0);
 }

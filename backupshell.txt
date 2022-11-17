@@ -1,9 +1,6 @@
 #include "shell.h"
 /**
  * main - main shell loop
- * @ac: argument count
- * @av: argument variables
- * @envp: environment variable
  * Description: main shell loop
  * Return: 0;
  */
@@ -15,7 +12,7 @@ int main(int ac, char **av, char *envp[])
 
 	ssize_t linesize = 0;
 
-	int count = 0;
+	int count = 0, int_mode = isatty(STDIN);
 
 	(void)envp, (void)av;
 
@@ -23,7 +20,11 @@ int main(int ac, char **av, char *envp[])
 		return (-1);
 	while (1)
 	{
-		prompt();
+		int_mode = isatty(STDIN);
+
+		if  (int_mode == 1)
+			write(STDOUT, "$ ", 2);
+
 		linesize += getline(&line, &len, stdin);
 
 		buff = create_tokens(line);
