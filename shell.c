@@ -17,8 +17,6 @@ int main(int ac, char **av, char *envp[])
 
 	ssize_t linesize = 0;
 
-	int count = 0;
-
 	(void)envp, (void)av;
 
 	if (ac < 1)

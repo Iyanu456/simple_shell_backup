@@ -7,8 +7,6 @@
  */
 void free_buffers(char **buf)
 {
-	int i = 0;
-
 	if (!buf || buf == NULL)
 		return;
 
