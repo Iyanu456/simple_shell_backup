@@ -9,7 +9,7 @@
  */
 int main(int ac, char **av, char *envp[])
 {
-	char *line = NULL, **buff = NULL, **cmd, *tmp_str;
+	char *line = NULL, **buff = NULL, *tmp_str;
 
 	size_t len = 0;
 
