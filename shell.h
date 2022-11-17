@@ -27,10 +27,12 @@ int _strlen(const char *str);
 int _strcmp(const char *str1, const  char *str2);
 int _strncmp(char *s1, char *s2, int n);
 char *_strdup(const char *str);
+unsigned int check_delim(char *s);
 unsigned int check_spaces(char *s);
 
 char **create_tokens(char *line);
 char **create_path_tokens(char *line);
+char **parse_token(char **token, char *line, char *delim);
 char *del_whitespace(char *line);
 int handle_token(char **command,char *token);
 int get_env(void);

@@ -16,6 +16,7 @@ char **create_tokens(char *line)
 	spaces += check_spaces(line);
 
 	tokens = malloc(sizeof(char *) * (spaces + 1));
+
 	if (tokens == NULL)
 		return (NULL);
 

@@ -71,14 +71,15 @@ int _strlen(const char *str)
  * Description: loops through a string and counts the spaces
  * Return: number of  counts
  */
-unsigned int check_spaces(char *s)
+unsigned int check_delim(char *s)
 {
 	unsigned int i, count = 0;
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (s[i] == ' ')
+		if (s[i] == ':')
 			count++;
 	}
+
 	return (count);
 }

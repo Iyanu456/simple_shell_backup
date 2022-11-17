@@ -9,7 +9,9 @@
  */
 int main(int ac, char **av, char *envp[])
 {
-	char *line = NULL, **buff = NULL, *tmp_str;
+	char *line, **buff = NULL, **cmd = NULL;
+
+	char **paths = NULL, *path, *pathcommand, **paths_buff;
 
 	size_t len = 0;
 
@@ -27,25 +29,21 @@ int main(int ac, char **av, char *envp[])
 		prompt();
 		linesize += getline(&line, &len, stdin);
 
+		if (line[linesize - 1] == ' ')
+			line[linesize - 1] = '\0';
+
 		buff = create_tokens(line);
+		cmd = parse_token(buff, line, " ");
+		handle_token(cmd, cmd[0]);
+		path = find_path();
+		paths_buff = create_path_tokens(path);
+		paths = parse_token(paths_buff, path, ":");
+		pathcommand = test_path(paths, cmd[0]);
 
-		while (*buff != NULL)
-		{
-			tmp_str = *buff;
-
-			while (tmp_str[count] != '\0')
-			{
-				if (tmp_str[count] == '\n')
-					tmp_str[count] = '\0';
-				count++;
-			}
-
-			count = 0;
-
-			handle_token(buff, tmp_str);
-
-			buff++;
-		}
+		if (!pathcommand)
+			perror(av[0]);
+		else
+			execution(pathcommand, cmd);
 	}
 	return (0);
 }

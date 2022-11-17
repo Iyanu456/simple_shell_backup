@@ -1,18 +1,23 @@
 #include "shell.h"
 /**
  * main - main shell loop
+ * @ac: argument count
+ * @av: argument variables
+ * @envp: environment variable
  * Description: main shell loop
  * Return: 0;
  */
 int main(int ac, char **av, char *envp[])
 {
-	char *line = NULL, **buff, *tmp_str;
+	char *line = NULL, **buff = NULL, **cmd, *tmp_str;
+
+	char *paths = NULL;
 
 	size_t len = 0;
 
 	ssize_t linesize = 0;
 
-	int count = 0, int_mode = isatty(STDIN);
+	int count = 0, size;
 
 	(void)envp, (void)av;
 
@@ -20,14 +25,19 @@ int main(int ac, char **av, char *envp[])
 		return (-1);
 	while (1)
 	{
-		int_mode = isatty(STDIN);
+		free_buffers(buff);
 
-		if  (int_mode == 1)
-			write(STDOUT, "$ ", 2);
+		prompt();
 
 		linesize += getline(&line, &len, stdin);
 
+		size = check_spaces(line);
+
 		buff = create_tokens(line);
+
+		cmd = malloc(sizeof(char *) * (size + 1));
+
+		size = 0;
 
 		while (*buff != NULL)
 		{
@@ -41,11 +51,14 @@ int main(int ac, char **av, char *envp[])
 			}
 
 			count = 0;
-
-			handle_token(buff, tmp_str);
-
+			cmd[size] = tmp_str;
+			size++;
 			buff++;
 		}
+		size = 0;
+		handle_token(cmd, cmd[0]);
+		paths = find_path();
+		printf("%s\n", paths);
 	}
 	return (0);
 }

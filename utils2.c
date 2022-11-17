@@ -20,3 +20,18 @@ int _strncmp(char *s1, char *s2, int n)
 	return (0);
 
 }
+
+unsigned int check_spaces(char *s)
+{
+	unsigned int i, count = 0;
+
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		if (s[i] == ' ')
+			count++;
+	}
+	if (s[count + 1] == ' ')
+		count--;
+
+	return (count + 1);
+}
