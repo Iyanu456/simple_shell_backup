@@ -32,9 +32,8 @@ int handle_token(char **command, char *token)
 
 		else if (_strcmp(token, "exit") == 0)
 		{
-			free(command);
 			exit(0);
-			return (1);
+			return (0);
 		}
 		else
 			continue;
