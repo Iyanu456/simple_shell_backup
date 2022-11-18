@@ -9,13 +9,15 @@
  */
 int main(int ac, char **av, char *envp[])
 {
-	char *line, **buff = NULL, **cmd = NULL;
+	char *line = NULL, **buff = NULL, **cmd, *tmp_str;
 
-	char **paths = NULL, *path, *pathcommand, **paths_buff;
+	char *paths = NULL;
 
 	size_t len = 0;
 
 	ssize_t linesize = 0;
+
+	int count = 0, size;
 
 	(void)envp, (void)av;
 
@@ -24,24 +26,39 @@ int main(int ac, char **av, char *envp[])
 	while (1)
 	{
 		free_buffers(buff);
+
 		prompt();
+
 		linesize += getline(&line, &len, stdin);
 
-		if (line[linesize - 1] == ' ')
-			line[linesize - 1] = '\0';
+		size = check_spaces(line);
 
 		buff = create_tokens(line);
-		cmd = parse_token(buff, line, " ");
-		handle_token(cmd, cmd[0]);
-		path = find_path();
-		paths_buff = create_path_tokens(path);
-		paths = parse_token(paths_buff, path, ":");
-		pathcommand = test_path(paths, cmd[0]);
 
-		if (!pathcommand)
-			perror(av[0]);
-		else
-			execution(pathcommand, cmd);
+		cmd = malloc(sizeof(char *) * (size + 1));
+
+		size = 0;
+
+		while (*buff != NULL)
+		{
+			tmp_str = *buff;
+
+			while (tmp_str[count] != '\0')
+			{
+				if (tmp_str[count] == '\n')
+					tmp_str[count] = '\0';
+				count++;
+			}
+
+			count = 0;
+			cmd[size] = tmp_str;
+			size++;
+			buff++;
+		}
+		size = 0;
+		handle_token(cmd, cmd[0]);
+		paths = find_path();
+		printf("%s\n", paths);
 	}
 	return (0);
 }

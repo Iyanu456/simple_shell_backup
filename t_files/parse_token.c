@@ -18,26 +18,22 @@ char **parse_token(char **token, char *line, char *delim)
 
 	else if (_strcmp(delim, " ") == 0)
 		size = check_spaces(line);
-	printf("spaces = %d\n", size);
 
 	cmd = malloc(sizeof(char *) * (size + 1));
 
 	while (*token)
 	{
 		temp_str = *token;
-
 		while (temp_str[count] != '\0')
 		{
 			if (temp_str[count] == '\n')
 				temp_str[count] = '\0';
 			count++;
 		}
-
 		count = 0;
 		cmd[i] = temp_str;
 		i++;
 		token++;
 	}
-	i = 0;
 	return (cmd);
 }

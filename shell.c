@@ -11,7 +11,7 @@ int main(int ac, char **av, char *envp[])
 {
 	char *line, **buff = NULL, **cmd = NULL;
 
-	char **paths = NULL, *path, *pathcommand, **paths_buff;
+	char *pathcommand;
 
 	size_t len = 0;
 
@@ -33,15 +33,12 @@ int main(int ac, char **av, char *envp[])
 		buff = create_tokens(line);
 		cmd = parse_token(buff, line, " ");
 		handle_token(cmd, cmd[0]);
-		path = find_path();
-		paths_buff = create_path_tokens(path);
-		paths = parse_token(paths_buff, path, ":");
-		pathcommand = test_path(paths, cmd[0]);
+		pathcommand = test_path(cmd, cmd[0]);
 
 		if (!pathcommand)
 			perror(av[0]);
 		else
-			execution(pathcommand, cmd);
+			execution(cmd[0], cmd);
 	}
 	return (0);
 }

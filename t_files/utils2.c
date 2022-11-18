@@ -30,6 +30,8 @@ unsigned int check_spaces(char *s)
 		if (s[i] == ' ')
 			count++;
 	}
+	if (s[count + 1] == ' ')
+		count--;
 
 	return (count + 1);
 }
