@@ -1,44 +1,29 @@
 #include "shell.h"
 /**
- * main - main shell loop
- * @ac: argument count
- * @av: argument variables
- * @envp: environment variable
- * Description: main shell loop
- * Return: 0;
+ * main - the shell program start point
+ * @ac: int num of command line args
+ * @av: null term'd arr of strs contain args
+ * @ev: null term'd arr of strs contain env vars
+ * Return: int result. 0 in success, everything else is an error
  */
-int main(int ac, char **av, char *envp[])
+int main(int ac, char **av, char **ev)
 {
-	char *line, **buff = NULL, **cmd = NULL;
+	sev_t sev;
+	int exitcode = 0;
+	(void)ac;
+	init_shell_env(&sev, av, ev);
 
-	char *pathcommand;
-
-	size_t len = 0;
-
-	ssize_t linesize = 0;
-
-	(void)envp, (void)av;
-
-	if (ac < 1)
-		return (-1);
-	while (1)
+	while (sev.skywalker)
 	{
-		free_buffers(buff);
-		prompt();
-		linesize += getline(&line, &len, stdin);
-
-		if (line[linesize - 1] == ' ')
-			line[linesize - 1] = '\0';
-
-		buff = create_tokens(line);
-		cmd = parse_token(buff, line, " ");
-		handle_token(cmd, cmd[0]);
-		pathcommand = test_path(cmd, cmd[0]);
-
-		if (!pathcommand)
-			perror(av[0]);
-		else
-			execution(cmd[0], cmd);
+		dis_prompt(sev);
+		getcom(&sev);
+		checker_alias(&sev);
+		if (!check_builtin(&sev))
+			actions(&sev);
+		dis_error(&sev);
 	}
-	return (0);
+	write_log(&sev);
+	exitcode = sev.error;
+	cl_sev(&sev);
+	return (exitcode);
 }
