@@ -12,7 +12,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include "./stringfile/string.h"
+#include <string.h>
 #include "linklist.h"
 #include "./memofile/memo.h"
 #include "shellvar.h"
