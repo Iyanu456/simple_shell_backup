@@ -30,7 +30,7 @@ Brief description of every file in this repository. Subject to change.
 
 ### Authors
 ---
-[Faith Ikhidero](https://github.com/Faitholo)
--
-[Olumide Akinduko](https://github.com/logicSt)
--
+[Iyanu Oyerinde](https://github.com/Iyanu456)
+
+[Gift Chukwudi](https://github.com/Gift111)
+---
